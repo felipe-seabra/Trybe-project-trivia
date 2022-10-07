@@ -1,17 +1,14 @@
 import React from "react";
-import { findByText, screen, waitFor } from "@testing-library/react";
-import Login from '../pages/Login'
+import { screen, waitFor } from "@testing-library/react";
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 import userEvent from "@testing-library/user-event";
 import App from '../App'
-import fetchToken from "../services/fetchToken";
 import { act } from "react-dom/test-utils";
+
 
 
 describe('Testando o componente Login', () => {
     it('Verificando se a pagina login tem o comportamento desejado' , async () => {
-        jest.spyOn(Storage.prototype, 'setItem');
-        Storage.prototype.setItem = jest.fn();
         const {history} = renderWithRouterAndRedux(<App/>)
         expect(history.location.pathname).toBe('/')
         const nameInput = screen.getByTestId('input-player-name')
@@ -32,9 +29,12 @@ describe('Testando o componente Login', () => {
         await waitFor(() => {
             expect(history.location.pathname).toBe('/game')
           });     
-
+    })
+    
+    it('testando o botão de "settings"' , () => {
+       const { history } = renderWithRouterAndRedux(<App />)
+        const settingsButton = screen.getByTestId('btn-settings')
         userEvent.click(settingsButton)
-         expect(history.location.pathname).toBe('/settings')
-
+        expect(history.location.pathname).toBe('/settings')
     })
 })
