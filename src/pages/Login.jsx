@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchToken from '../services/fetchToken';
 import { setLocalStorage } from '../services/localStorage';
+import { actLogin as loginAction } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -26,15 +27,16 @@ class Login extends React.Component {
   };
 
   handleLogin = async () => {
-    const { history } = this.props;
+    const { history, actLogin } = this.props;
     const result = await fetchToken();
     setLocalStorage('token', result);
+    actLogin(this.state);
     history.push('/game');
   };
 
   render() {
-    const { name, email } = this.state;
     const { history } = this.props;
+    const { name, email } = this.state;
     return (
       <div>
         <section>
@@ -78,10 +80,14 @@ class Login extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  actLogin: (state) => dispatch(loginAction(state)),
+});
+
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
 }.isRequired;
 
-export default connect()(Login);
+export default connect(null, mapDispatchToProps)(Login);
