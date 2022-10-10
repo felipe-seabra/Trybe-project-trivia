@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchQuestions from '../services/fetchQuestions';
+import sortQuestions from '../services/sortQuestions';
+import CardQuestion from '../components/CardQuestion';
 
 class Game extends Component {
   state = {
     questions: [],
+    index: 0,
   };
 
   async componentDidMount() {
@@ -16,19 +19,26 @@ class Game extends Component {
       localStorage.removeItem('token');
       history.push('/');
     }
+    // embaralhar as respostas
+    const sorted = results.map(sortQuestions);
     // salva as questões no state local
     this.setState((prevState) => ({
       ...prevState,
-      questions: [...results],
+      questions: [...sorted],
     }));
   }
 
   render() {
+    const { questions, index } = this.state;
     return (
       // aqui vai o Header ...
       <main>
         <div>
-          Game
+          { !!questions.length && ( // aguardar o estado ser gravado
+            <CardQuestion
+              question={ questions[index] }
+            />
+          )}
         </div>
       </main>
     );

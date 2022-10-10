@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case LOGIN:
-    console.log(action);
     return {
       ...state,
       name: action.state.name,
