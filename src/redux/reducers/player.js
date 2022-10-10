@@ -3,6 +3,7 @@ import { LOGIN } from '../actions/actionsTypes';
 const INITIAL_STATE = {
   name: '',
   email: '',
+  score: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
