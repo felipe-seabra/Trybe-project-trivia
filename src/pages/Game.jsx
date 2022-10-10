@@ -10,6 +10,7 @@ class Game extends Component {
   state = {
     questions: [],
     index: 0,
+    timer: 30,
   };
 
   async componentDidMount() {
@@ -27,10 +28,25 @@ class Game extends Component {
       ...prevState,
       questions: [...sorted],
     }));
+    this.handleTimer();
   }
 
+  handleTimer = () => {
+    const ONE_SECOND = 1000;
+
+    setInterval(async () => {
+      const { timer } = this.state;
+      if (timer > 0) {
+        this.setState((prevState) => ({
+          ...prevState,
+          timer: prevState.timer - 1,
+        }));
+      }
+    }, ONE_SECOND);
+  };
+
   render() {
-    const { questions, index } = this.state;
+    const { questions, index, timer } = this.state;
     return (
 
       <main>
@@ -39,8 +55,9 @@ class Game extends Component {
           { !!questions.length && ( // aguardar o estado ser gravado
             <CardQuestion
               question={ questions[index] }
+              timer={ timer }
             />
-          )}
+          ) }
         </div>
       </main>
     );
