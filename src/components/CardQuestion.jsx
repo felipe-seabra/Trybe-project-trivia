@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/cardQuestions.css';
-import { getByTestId, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 class CardQuestion extends Component {
   verifyQuestion = (element, question, index) => {
@@ -11,11 +11,11 @@ class CardQuestion extends Component {
 
   handleClick = () => {
     const btns = screen.getAllByRole('button');
-    btns.map((btn) => {
-      if (btn.attributes.data - testid.value === 'correct-answer') {
-        btn.className = 'correct';
-    }
-  }}
+    btns.map((btn) => ((btn.dataset.testid === 'correct-answer')
+      ? btn.classList.add('correct')
+      : btn.classList.add('incorrect')
+    ));
+  };
 
   render() {
     const { question } = this.props;
