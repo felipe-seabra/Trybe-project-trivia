@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import fetchQuestions from '../services/fetchQuestions';
 import sortQuestions from '../services/sortQuestions';
 import CardQuestion from '../components/CardQuestion';
+import Header from '../components/Header';
 
 class Game extends Component {
   state = {
@@ -31,9 +32,10 @@ class Game extends Component {
   render() {
     const { questions, index } = this.state;
     return (
-      // aqui vai o Header ...
+
       <main>
         <div>
+          <Header />
           { !!questions.length && ( // aguardar o estado ser gravado
             <CardQuestion
               question={ questions[index] }
