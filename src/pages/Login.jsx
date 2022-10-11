@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import fetchToken from '../services/fetchToken';
 import { setLocalStorage } from '../services/localStorage';
 import { actLogin as loginAction } from '../redux/actions';
+import '../styles/Login.css';
 
 class Login extends React.Component {
   state = {
@@ -38,8 +39,8 @@ class Login extends React.Component {
     const { history } = this.props;
     const { name, email } = this.state;
     return (
-      <div>
-        <section>
+      <div className="login">
+        <section className="login-inputs">
           <input
             type="text"
             placeholder="Nome"
@@ -57,7 +58,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
         </section>
-        <div>
+        <div className="link">
           <button
             type="button"
             data-testid="btn-play"
