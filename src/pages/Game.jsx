@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { screen } from '@testing-library/react';
 import fetchQuestions from '../services/fetchQuestions';
 import sortQuestions from '../services/sortQuestions';
 import CardQuestion from '../components/CardQuestion';
@@ -17,6 +18,7 @@ class Game extends Component {
   async componentDidMount() {
     const { history } = this.props;
     const { results } = await fetchQuestions();
+
     // caso não tenha retorno, volta para a tela de login
     if (!results.length) {
       localStorage.removeItem('token');
@@ -34,14 +36,19 @@ class Game extends Component {
 
   handleTimer = () => {
     const ONE_SECOND = 1000;
-
     setInterval(async () => {
       const { timer, answered } = this.state;
       if (timer > 0 && !answered) {
         this.setState((prevState) => ({
           ...prevState,
           timer: prevState.timer - 1,
-        }));
+        }
+        ));
+      }
+      if (timer === 0) {
+        this.setState({
+          answered: true,
+        });
       }
     }, ONE_SECOND);
   };
@@ -51,8 +58,22 @@ class Game extends Component {
     this.setState({ answered: !answered });
   };
 
+  handleClick = async () => {
+    const { index } = this.state;
+    this.setState({
+      index: index + 1,
+      timer: 30,
+      answered: false,
+    });
+
+    const btns = await screen.getAllByRole('button');
+    console.log(btns);
+    btns.map((btn) => (btn.className = 'reset-btn'));
+  };
+
   render() {
     const { questions, index, timer, answered } = this.state;
+    const NUMBER = 5;
     return (
 
       <main>
@@ -67,11 +88,12 @@ class Game extends Component {
             />
           ) }
         </div>
-        {answered
+        {answered && index < NUMBER
         && (
           <button
             type="button"
             data-testid="btn-next"
+            onClick={ this.handleClick }
           >
             Next
           </button>

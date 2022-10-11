@@ -5,9 +5,10 @@ import '../styles/cardQuestions.css';
 import { screen } from '@testing-library/react';
 import { getScore } from '../redux/actions';
 
+const correct = 'correct-answer';
 class CardQuestion extends Component {
   verifyQuestion = (element, question, index) => {
-    if (element === question.correct_answer) { return 'correct-answer'; }
+    if (element === question.correct_answer) { return correct; }
     return `wrong-answer-${index}`;
   };
 
@@ -32,7 +33,7 @@ class CardQuestion extends Component {
   handleClick = ({ target }) => {
     const { handleAnswer, dispatch } = this.props;
     const btns = screen.getAllByRole('button');
-    btns.map((btn) => ((btn.dataset.testid === 'correct-answer')
+    btns.map((btn) => ((btn.dataset.testid === correct)
       ? btn.classList.add('correct')
       : btn.classList.add('incorrect')
     ));
@@ -68,6 +69,7 @@ class CardQuestion extends Component {
           {
             question.sortedQuestions.map((element, index) => (
               <button
+                className="btn"
                 type="button"
                 key={ index }
                 data-testid={ this.verifyQuestion(element, question, index) }
