@@ -7,6 +7,8 @@ import sortQuestions from '../services/sortQuestions';
 import CardQuestion from '../components/CardQuestion';
 import Header from '../components/Header';
 
+let MAX_INDEX = 0;
+
 class Game extends Component {
   state = {
     questions: [],
@@ -60,26 +62,33 @@ class Game extends Component {
 
   handleClick = async () => {
     const { index } = this.state;
+    const { history } = this.props;
+    const MAX_GAMES = 5;
+
     this.setState({
       index: index + 1,
       timer: 30,
       answered: false,
     });
 
+    function cssReset(element) { element.className = 'reset-btn'; }
     const btns = await screen.getAllByRole('button');
-    console.log(btns);
-    btns.map((btn) => (btn.className = 'reset-btn'));
+    btns.map((btn) => (cssReset(btn)));
+    MAX_INDEX += 1;
+    if (MAX_INDEX === MAX_GAMES) {
+      history.push('/feedback');
+    }
   };
 
   render() {
     const { questions, index, timer, answered } = this.state;
-    const NUMBER = 5;
+    const number = 4;
     return (
 
       <main>
         <div>
           <Header />
-          { !!questions.length && ( // aguardar o estado ser gravado
+          { !!questions.length && MAX_INDEX < number && ( // aguardar o estado ser gravado
             <CardQuestion
               question={ questions[index] }
               timer={ timer }
@@ -88,16 +97,16 @@ class Game extends Component {
             />
           ) }
         </div>
-        {answered && index < NUMBER
-        && (
-          <button
-            type="button"
-            data-testid="btn-next"
-            onClick={ this.handleClick }
-          >
-            Next
-          </button>
-        )}
+        { answered
+          && (
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={ this.handleClick }
+            >
+              Next
+            </button>
+          ) }
       </main>
     );
   }
