@@ -11,6 +11,7 @@ class Game extends Component {
     questions: [],
     index: 0,
     timer: 30,
+    answered: false,
   };
 
   async componentDidMount() {
@@ -35,8 +36,8 @@ class Game extends Component {
     const ONE_SECOND = 1000;
 
     setInterval(async () => {
-      const { timer } = this.state;
-      if (timer > 0) {
+      const { timer, answered } = this.state;
+      if (timer > 0 && !answered) {
         this.setState((prevState) => ({
           ...prevState,
           timer: prevState.timer - 1,
@@ -45,8 +46,13 @@ class Game extends Component {
     }, ONE_SECOND);
   };
 
+  handleAnswer = () => {
+    const { answered } = this.state;
+    this.setState({ answered: !answered });
+  };
+
   render() {
-    const { questions, index, timer } = this.state;
+    const { questions, index, timer, answered } = this.state;
     return (
 
       <main>
@@ -56,6 +62,8 @@ class Game extends Component {
             <CardQuestion
               question={ questions[index] }
               timer={ timer }
+              handleAnswer={ this.handleAnswer }
+              disableCheck={ answered }
             />
           ) }
         </div>

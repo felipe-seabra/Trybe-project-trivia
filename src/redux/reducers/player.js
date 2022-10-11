@@ -2,8 +2,9 @@ import { LOGIN } from '../actions/actionsTypes';
 
 const INITIAL_STATE = {
   name: '',
-  email: '',
+  assertions: 0,
   score: 0,
+  gravatarEmail: '',
 };
 
 const player = (state = INITIAL_STATE, action) => {

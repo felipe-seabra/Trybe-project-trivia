@@ -10,16 +10,18 @@ class CardQuestion extends Component {
   };
 
   handleClick = () => {
+    const { handleAnswer } = this.props;
     const btns = screen.getAllByRole('button');
     btns.map((btn) => ((btn.dataset.testid === 'correct-answer')
       ? btn.classList.add('correct')
       : btn.classList.add('incorrect')
     ));
+    handleAnswer();
   };
 
   handleTimer = () => {
-    const { timer } = this.props;
-    if (timer === 0) {
+    const { timer, disableCheck } = this.props;
+    if (timer === 0 || disableCheck) {
       return true;
     }
   };
