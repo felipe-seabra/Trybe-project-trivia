@@ -1,15 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../styles/cardQuestions.css';
 import { screen } from '@testing-library/react';
 
 class CardQuestion extends Component {
+  state = {
+    difficulty: 0,
+  };
+
   verifyQuestion = (element, question, index) => {
     if (element === question.correct_answer) { return 'correct-answer'; }
     return `wrong-answer-${index}`;
   };
 
-  handleClick = () => {
+  handleScore = () => {
+    const { score, assertions, timer, question } = this.props;
+    const TREE = 3;
+    const TWO = 2;
+    const ONE = 1;
+    const TEN = 10;
+    switch (question.difficulty) {
+    case 'hard':
+      return TEN + (timer * TREE);
+    case 'medium':
+      return TEN + (timer * TWO);
+    case 'easy':
+      return TEN + (timer * ONE);
+    default:
+      return null;
+    }
+  };
+
+  handleClick = ({ target }) => {
     const { handleAnswer } = this.props;
     const btns = screen.getAllByRole('button');
     btns.map((btn) => ((btn.dataset.testid === 'correct-answer')
@@ -17,6 +40,10 @@ class CardQuestion extends Component {
       : btn.classList.add('incorrect')
     ));
     handleAnswer();
+    // console.log(target);
+    if (target.classList.contains('correct')) {
+      console.log(this.handleScore());
+    }
   };
 
   handleTimer = () => {
@@ -61,6 +88,11 @@ class CardQuestion extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  score: state.player.score,
+  assertions: state.player.assertions,
+});
+
 CardQuestion.propTypes = {
   question: PropTypes.shape({
     category: PropTypes.string,
@@ -69,4 +101,4 @@ CardQuestion.propTypes = {
   }),
 }.isRequired;
 
-export default CardQuestion;
+export default connect(mapStateToProps)(CardQuestion);
