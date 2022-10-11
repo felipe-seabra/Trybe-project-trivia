@@ -7,3 +7,8 @@
   background-color: red;
   border: 3px solid red;
 }
+
+.reset-btn {
+  background-color: white;
+  border: 1px solid black;
+}
