@@ -67,6 +67,15 @@ class Game extends Component {
             />
           ) }
         </div>
+        {answered
+        && (
+          <button
+            type="button"
+            data-testid="btn-next"
+          >
+            Next
+          </button>
+        )}
       </main>
     );
   }
