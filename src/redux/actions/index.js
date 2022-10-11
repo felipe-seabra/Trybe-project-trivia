@@ -1,5 +1,5 @@
 import md5 from 'crypto-js/md5';
-import { LOGIN } from './actionsTypes';
+import { LOGIN, SCORE } from './actionsTypes';
 
 export const actLogin = (state) => ({
   type: LOGIN,
@@ -13,5 +13,9 @@ const avatarImg = (email) => {
   const url = `https://www.gravatar.com/avatar/${gravatarLink}`;
   return url;
 };
+
+// export const getAssertions = (payload) => ({ type: ASSERTIONS, payload });
+
+export const getScore = (payload) => ({ type: SCORE, payload });
 
 export default avatarImg;
