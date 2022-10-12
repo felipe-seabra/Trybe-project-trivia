@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import avatarImg from '../redux/actions/index';
+import '../styles/Header.css';
 
 class Header extends React.Component {
   render() {
@@ -9,13 +10,23 @@ class Header extends React.Component {
 
     return (
       <header>
-        <img
-          data-testid="header-profile-picture"
-          src={ avatarImg(email) }
-          alt="img-avatar"
-        />
-        <p data-testid="header-player-name">{ name }</p>
-        <p data-testid="header-score">{ score }</p>
+        <div className="header">
+          <img
+            data-testid="header-profile-picture"
+            src={ avatarImg(email) }
+            alt="img-avatar"
+            className="img-avatar"
+          />
+          <p data-testid="header-player-name" className="name">
+            { name }
+          </p>
+          <span>
+            Pontos:
+          </span>
+          <p data-testid="header-score" className="score">
+            { score }
+          </p>
+        </div>
       </header>
 
     );
