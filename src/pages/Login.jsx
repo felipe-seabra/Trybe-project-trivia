@@ -5,6 +5,9 @@ import fetchToken from '../services/fetchToken';
 import { setLocalStorage } from '../services/localStorage';
 import { actLogin as loginAction } from '../redux/actions';
 import '../styles/Login.css';
+import logo from '../images/logo-trivia.svg';
+import config from '../images/config.svg';
+import play from '../images/play.svg';
 
 class Login extends React.Component {
   state = {
@@ -40,21 +43,22 @@ class Login extends React.Component {
     const { name, email } = this.state;
     return (
       <div className="login">
+        <img src={ logo } alt="Logo Trivia" className="logo" />
         <section className="login-inputs">
           <input
-            type="text"
-            placeholder="Nome"
-            data-testid="input-player-name"
-            name="name"
-            value={ name }
-            onChange={ this.handleChange }
-          />
-          <input
             type="email"
-            placeholder="E-mail"
+            placeholder="Qual é o seu e-mail do gravatar?"
             data-testid="input-gravatar-email"
             name="email"
             value={ email }
+            onChange={ this.handleChange }
+          />
+          <input
+            type="text"
+            placeholder="Qual é o seu nome?"
+            data-testid="input-player-name"
+            name="name"
+            value={ name }
             onChange={ this.handleChange }
           />
         </section>
@@ -65,6 +69,8 @@ class Login extends React.Component {
             disabled={ this.verifyBtn() }
             onClick={ this.handleLogin }
           >
+            <img src={ play } alt="Icon Play" className="icon" />
+            {' '}
             Play
           </button>
           <button
@@ -72,6 +78,8 @@ class Login extends React.Component {
             data-testid="btn-settings"
             onClick={ () => history.push('/settings') }
           >
+            <img src={ config } alt="Icon Config" className="icon" />
+            {' '}
             Configurações
           </button>
         </div>
