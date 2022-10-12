@@ -69,7 +69,6 @@ class CardQuestion extends Component {
           {
             question.sortedQuestions.map((element, index) => (
               <button
-                className="btn"
                 type="button"
                 key={ index }
                 data-testid={ this.verifyQuestion(element, question, index) }

@@ -1,0 +1,27 @@
+:root {
+
+  --green-prymary: #2fc18c;
+
+  --green-secondary: #6fbda0;
+}
+
+.btn {
+  align-items: center;
+  align-self: center;
+  background-color: var(--green-prymary);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 15px;
+  padding: 5px;
+  width: 400px;
+}
+
+.btn:hover {
+  background-color: var(--green-secondary);
+}

@@ -2,7 +2,7 @@
 
   --green-prymary: #2fc18c;
 
-  --green-secondary: #2fc18c;
+  --green-secondary: #6fbda0;
 }
 
 * {
@@ -77,11 +77,11 @@ body {
 }
 
 .link button:hover {
-  background-color: var(--green-prymary);
+  background-color: var(--green-secondary);
 }
 
 .link button:disabled {
-  background-color: var(--green-secondary);
+  background-color: var(--green-prymary);
   cursor: not-allowed;
   opacity: 40%;
 }

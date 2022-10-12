@@ -6,6 +6,7 @@ import fetchQuestions from '../services/fetchQuestions';
 import sortQuestions from '../services/sortQuestions';
 import CardQuestion from '../components/CardQuestion';
 import Header from '../components/Header';
+import '../styles/Game.css';
 
 let MAX_INDEX = 0;
 
@@ -103,6 +104,7 @@ class Game extends Component {
               type="button"
               data-testid="btn-next"
               onClick={ this.handleClick }
+              className="btn"
             >
               Next
             </button>
