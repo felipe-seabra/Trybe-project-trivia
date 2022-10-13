@@ -18,4 +18,6 @@ const avatarImg = (email) => {
 
 export const getScore = (payload) => ({ type: SCORE, payload });
 
+export const clearScore = () => ({ type: CLEAR });
+
 export default avatarImg;

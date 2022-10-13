@@ -6,6 +6,21 @@ import Header from '../components/Header';
 import '../styles/Feedback.css';
 
 class Feedback extends Component {
+  componentDidMount() {
+    this.saveRankingToLocalStorage();
+  }
+
+  saveRankingToLocalStorage = () => {
+    const { email, name, score } = this.props;
+    const getLocalStorage = localStorage.getItem('ranking');
+    const recentPlayer = { email, name, score };
+    if (!getLocalStorage) {
+      localStorage.setItem('ranking', JSON.stringify(recentPlayer));
+    } else {
+      JSON.parse(getLocalStorage).push(recentPlayer);
+    }
+  };
+
   render() {
     const { history, assertions, score, email } = this.props;
     const THREE = 3;
@@ -16,7 +31,7 @@ class Feedback extends Component {
           <div className="container-feedback">
             <img src={ avatarImg(email) } alt="Avatar" className="avatar" />
             <p data-testid="feedback-text" className="message">
-              {assertions >= THREE ? 'Well Done!' : 'Could be better...'}
+              { assertions >= THREE ? 'Well Done!' : 'Could be better...' }
             </p>
             <p data-testid="feedback-total-score" className="points">
               { score }
@@ -51,6 +66,7 @@ const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
   email: state.player.email,
+  name: state.player.name,
 });
 
 Feedback.propTypes = {
@@ -60,6 +76,7 @@ Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
   score: PropTypes.number.isRequired,
   email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
