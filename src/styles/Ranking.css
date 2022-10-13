@@ -1,0 +1,69 @@
+.container-ranking-general {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30%;
+  max-width: 80vw;
+}
+
+.title {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.container-rankging {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: center;
+  margin: 12px;
+  width: 200px;
+}
+
+.img {
+  border-radius: 100%;
+  filter: drop-shadow(0 0 9px #ea5d5d);
+}
+
+.name-player {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 12px;
+}
+
+.score-player {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.button-home {
+  align-items: center;
+  align-self: center;
+  background-color: #2fc18c;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 32px;
+  padding: 5px;
+  width: 400px;
+}
+
+.button-home:hover {
+  background-color: #6fbda0;
+}
