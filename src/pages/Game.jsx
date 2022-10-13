@@ -74,6 +74,7 @@ class Game extends Component {
     btns.map((btn) => (cssReset(btn)));
     MAX_INDEX += 1;
     if (MAX_INDEX === MAX_GAMES) {
+      MAX_INDEX = 0;
       history.push('/feedback');
     }
 

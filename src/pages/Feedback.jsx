@@ -12,12 +12,13 @@ class Feedback extends Component {
 
   saveRankingToLocalStorage = () => {
     const { email, name, score } = this.props;
-    const getLocalStorage = localStorage.getItem('ranking');
     const recentPlayer = { email, name, score };
-    if (!getLocalStorage) {
-      localStorage.setItem('ranking', JSON.stringify(recentPlayer));
+    const ranking = localStorage.getItem('ranking');
+    if (!ranking) {
+      localStorage.setItem('ranking', JSON.stringify([recentPlayer]));
     } else {
-      JSON.parse(getLocalStorage).push(recentPlayer);
+      const parsedRanking = JSON.parse(ranking);
+      localStorage.setItem('ranking', JSON.stringify([...parsedRanking, recentPlayer]));
     }
   };
 

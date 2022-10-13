@@ -1,5 +1,5 @@
 import md5 from 'crypto-js/md5';
-import { LOGIN, SCORE } from './actionsTypes';
+import { LOGIN, SCORE, CLEAR } from './actionsTypes';
 
 export const actLogin = (state) => ({
   type: LOGIN,

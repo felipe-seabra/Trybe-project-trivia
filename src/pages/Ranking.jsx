@@ -14,7 +14,7 @@ class Ranking extends Component {
   fetchLocalStorage = () => {
     const players = localStorage.getItem('ranking');
     const parsedObj = JSON.parse(players);
-    parsedObj.sort((a, b) => (a.score - b.score));
+    parsedObj.sort((a, b) => (b.score - a.score));
     this.setState({ ranking: parsedObj });
   };
 
