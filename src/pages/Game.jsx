@@ -90,7 +90,7 @@ class Game extends Component {
         <main>
           <div className="container">
             <div>
-              { !!questions.length && MAX_INDEX < number && ( // aguardar o estado ser gravado
+              { !!questions.length && MAX_INDEX <= number && ( // aguardar o estado ser gravado
                 <CardQuestion
                   question={ questions[index] }
                   timer={ timer }
