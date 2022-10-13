@@ -64,7 +64,7 @@ class Game extends Component {
   handleClick = async () => {
     const { index } = this.state;
     const { history } = this.props;
-    const MAX_GAMES = 4;
+    const MAX_GAMES = 5;
 
     this.setState({
       index: index + 1,

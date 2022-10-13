@@ -19,18 +19,10 @@ class Feedback extends Component {
               {assertions >= THREE ? 'Well Done!' : 'Could be better...'}
             </p>
             <p data-testid="feedback-total-score" className="points">
-              <span>Você acertou</span>
-              {' '}
               { score }
-              {' '}
-              <span>questões!</span>
             </p>
             <p data-testid="feedback-total-question" className="points">
-              <span>Um total de</span>
-              {' '}
               { assertions }
-              {' '}
-              pontos
             </p>
             <button
               className="btn-feedback"
