@@ -1,0 +1,32 @@
+header {
+  align-items: center;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 20%) 0 2px 4px -1px , rgb(0 0 0 / 14%) 0 4px 5px 0;
+  display: flex;
+  height: 113px;
+  justify-content: center;
+  margin-bottom: 16px;
+  width: 100vw;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.img-avatar {
+  border-radius: 50%;
+  height: 37px;
+  margin-right: 16px;
+  width: 37px;
+}
+
+.name {
+  margin-right: 50px;
+}
+
+.score {
+  font-weight: 700;
+  margin-left: 5px;
+}
