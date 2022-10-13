@@ -66,12 +66,6 @@ class Game extends Component {
     const { history } = this.props;
     const MAX_GAMES = 5;
 
-    this.setState({
-      index: index + 1,
-      timer: 30,
-      answered: false,
-    });
-
     function cssReset(element) { element.className = 'btn'; }
     const btns = await screen.getAllByRole('button');
     btns.map((btn) => (cssReset(btn)));
@@ -79,18 +73,26 @@ class Game extends Component {
     if (MAX_INDEX === MAX_GAMES) {
       history.push('/feedback');
     }
+
+    if (await index <= MAX_GAMES) {
+      this.setState({
+        index: index + 1,
+        timer: 30,
+        answered: false,
+      });
+    }
   };
 
   render() {
     const { questions, index, timer, answered } = this.state;
-    const number = 4;
+    const number = 5;
     return (
       <div>
         <Header />
         <main>
           <div className="container">
             <div>
-              { !!questions.length && MAX_INDEX < number && ( // aguardar o estado ser gravado
+              { !!questions.length && !!MAX_INDEX <= number && ( // aguardar o estado ser gravado
                 <CardQuestion
                   question={ questions[index] }
                   timer={ timer }
