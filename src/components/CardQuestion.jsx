@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import '../styles/cardQuestions.css';
 import { screen } from '@testing-library/react';
 import { getScore } from '../redux/actions';
+import timerImg from '../images/timer.svg';
 
 const correct = 'correct-answer';
 class CardQuestion extends Component {
@@ -54,21 +55,22 @@ class CardQuestion extends Component {
   render() {
     const { question, timer } = this.props;
     return (
-      <div>
-        <p data-testid="question-category">
+      <div className="container-questions">
+        <p data-testid="question-category" className="category">
           {
             question.category
           }
         </p>
-        <p data-testid="question-text">
+        <p data-testid="question-text" className="text">
           {
             question.question
           }
         </p>
-        <div data-testid="answer-options">
+        <div data-testid="answer-options" className="buttons">
           {
             question.sortedQuestions.map((element, index) => (
               <button
+                className="btn"
                 type="button"
                 key={ index }
                 data-testid={ this.verifyQuestion(element, question, index) }
@@ -79,8 +81,15 @@ class CardQuestion extends Component {
               </button>
             ))
           }
-          <p>{timer}</p>
         </div>
+        <p className="timer">
+          <span className="timer-text">
+            <img src={ timerImg } alt="Icon Timer" />
+            Timer:
+          </span>
+          {timer}
+          <span>s</span>
+        </p>
       </div>
     );
   }

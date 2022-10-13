@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import avatarImg from '../redux/actions/index';
+import iconStar from '../images/star.svg';
 import '../styles/Header.css';
 
 class Header extends React.Component {
@@ -21,7 +22,8 @@ class Header extends React.Component {
             { name }
           </p>
           <span>
-            Pontos:
+            <img src={ iconStar } alt="Icon star" className="icon" />
+            Points:
           </span>
           <p data-testid="header-score" className="score">
             { score }
