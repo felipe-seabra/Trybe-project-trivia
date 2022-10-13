@@ -1,5 +1,5 @@
 import md5 from 'crypto-js/md5';
-import { LOGIN, SCORE } from './actionsTypes';
+import { LOGIN, SCORE, CLEAR } from './actionsTypes';
 
 export const actLogin = (state) => ({
   type: LOGIN,
@@ -17,5 +17,7 @@ const avatarImg = (email) => {
 // export const getAssertions = (payload) => ({ type: ASSERTIONS, payload });
 
 export const getScore = (payload) => ({ type: SCORE, payload });
+
+export const clearScore = () => ({ type: CLEAR });
 
 export default avatarImg;

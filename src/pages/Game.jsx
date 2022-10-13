@@ -7,6 +7,7 @@ import sortQuestions from '../services/sortQuestions';
 import CardQuestion from '../components/CardQuestion';
 import Header from '../components/Header';
 import '../styles/Game.css';
+import { clearScore } from '../redux/actions';
 
 let MAX_INDEX = 0;
 
@@ -19,8 +20,10 @@ class Game extends Component {
   };
 
   async componentDidMount() {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
     const { results } = await fetchQuestions();
+
+    await dispatch(clearScore());
 
     // caso não tenha retorno, volta para a tela de login
     if (!results.length) {
@@ -71,6 +74,7 @@ class Game extends Component {
     btns.map((btn) => (cssReset(btn)));
     MAX_INDEX += 1;
     if (MAX_INDEX === MAX_GAMES) {
+      MAX_INDEX = 0;
       history.push('/feedback');
     }
 
@@ -102,16 +106,16 @@ class Game extends Component {
               ) }
             </div>
             { answered
-          && (
-            <button
-              type="button"
-              data-testid="btn-next"
-              onClick={ this.handleClick }
-              className="btn-next"
-            >
-              Next
-            </button>
-          ) }
+              && (
+                <button
+                  type="button"
+                  data-testid="btn-next"
+                  onClick={ this.handleClick }
+                  className="btn-next"
+                >
+                  Next
+                </button>
+              ) }
           </div>
         </main>
       </div>
@@ -127,6 +131,7 @@ Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Game);
